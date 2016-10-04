@@ -28,6 +28,8 @@ SnpSift helps filtering and manipulating genomic annotated files (VCF). Once you
 
 
 https://github.com/brentp/vcfanno
+
+
 vcfanno annotates a VCF with any number of sorted and tabixed input BED, BAM, and VCF files in parallel. It does this by finding overlaps as it streams over the data and applying user-defined operations on the overlapping annotations.
 
 In order to parallelize, work is broken down as follows. A slice (array) of query intervals is accumulated until a specified number is reached (usually ~5K-25K) or a gap cutoff is exceeded; at that point, the bounds of the region are used to perform a tabix (or any regional) query on the database files. This is all done in irelate. vcfanno then iterates over the streams that result from the tabix queries and finds intersections with the query stream. This is a parallel chrom-sweep. This method avoids problems with chromosome order.
